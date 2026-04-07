@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dcl8vv0ppdojc"]
+
+[ext_resource type="Script" uid="uid://dm8g8pn36jujw" path="res://base_enemy.gd" id="1"]
+
+[sub_resource type="Gradient" id="Gradient_8fkgw"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.43617022, 1)
+colors = PackedColorArray(0.98354656, 0.75199074, 0.58279717, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vaaym"]
+gradient = SubResource("Gradient_8fkgw")
+fill = 2
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 1)
+
+[node name="BaseEnemy" type="Area2D" unique_id=1294299636 groups=["enemies"]]
+script = ExtResource("1")
+strafe_speed = 100.0
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=163813505]
+position = Vector2(-92.4, -26.599998)
+texture = SubResource("GradientTexture2D_vaaym")
+polygon = PackedVector2Array(92, 3, 82, 15, 67, 15, 76, 26, 66, 41, 83, 40, 91, 51, 100, 41, 117, 41, 108, 28, 118, 15, 102, 15)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=480909278]
+position = Vector2(-28.4, -24.599998)
+polygon = PackedVector2Array(28, 1, 18, 13, 3, 13, 12, 24, 2, 39, 19, 38, 27, 49, 36, 39, 53, 39, 44, 26, 54, 13, 38, 13)
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=312847561]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
