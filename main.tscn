@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://mno1csuveumf"]
+
+[ext_resource type="Script" uid="uid://do553q0hourbx" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bwkh7q1mpq4lt" path="res://projectile.tscn" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bcrixogaodmey" path="res://player.tscn" id="2_h2yge"]
+
+[sub_resource type="Curve2D" id="Curve2D_1bvp3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 3, 0, 0, 0, 0, 1152, 7, 0, 0, 0, 0, 1155, 651, 0, 0, 0, 0, 0, 650, 0, 0, 0, 0, -1, 3)
+}
+point_count = 5
+
+[node name="Main" type="Node" unique_id=1961861181]
+script = ExtResource("1_0xm2m")
+projectileScene = ExtResource("2_1bvp3")
+
+[node name="Player" parent="." unique_id=1370778246 instance=ExtResource("2_h2yge")]
+
+[node name="BuletTimer" type="Timer" parent="." unique_id=1552590369]
+wait_time = 0.05
+
+[node name="StartTimer" type="Timer" parent="." unique_id=23832638]
+wait_time = 3.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="." unique_id=664441226]
+position = Vector2(300, 300)
+
+[node name="ProjectilePath" type="Path2D" parent="." unique_id=1138647750]
+curve = SubResource("Curve2D_1bvp3")
+
+[node name="BulletSpawnLocation" type="PathFollow2D" parent="ProjectilePath" unique_id=1414094960]
+position = Vector2(-1, 3)
+rotation = 0.0034691968
+
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="BuletTimer" to="." method="_on_bulet_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
