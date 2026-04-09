@@ -60,6 +60,7 @@ func die():
 	hide()
 	hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
+	$Weapon/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_body_entered(_body):
 	die()
