@@ -8,7 +8,7 @@ radius = 20.0
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(75, 10)
 
-[node name="Player" type="Area2D" groups=["player"] unique_id=1633159822]
+[node name="Player" type="Area2D" unique_id=1633159822 groups=["player"]]
 z_index = 10
 script = ExtResource("1")
 
