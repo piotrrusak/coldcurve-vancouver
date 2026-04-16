@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 signal hit
 
@@ -28,23 +28,22 @@ func _draw():
 	var p4 = tip  + perp * 1.0
 	draw_colored_polygon(PackedVector2Array([p1, p2, p3, p4]), Color.CYAN)
 
-func _process(delta):
-	var velocity = Vector2.ZERO
+func _physics_process(_delta):
+	var dir = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
+		dir.x += 1
 	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
+		dir.x -= 1
 	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
+		dir.y += 1
 	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
+		dir.y -= 1
 
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-
-	position += velocity * delta
+	velocity = dir.normalized() * speed if dir.length() > 0 else Vector2.ZERO
+	move_and_slide()
 	position = position.clamp(Vector2.ZERO, screen_size)
 
+func _process(_delta):
 	var mouse_local = get_local_mouse_position()
 	var dir = mouse_local.normalized() if mouse_local.length() > 1.0 else Vector2.RIGHT
 	$Weapon.position = dir * (CIRCLE_RADIUS + BLADE_LENGTH / 2.0)
@@ -55,6 +54,7 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+	$Weapon/CollisionShape2D.disabled = false
 
 func die():
 	hide()
@@ -62,10 +62,7 @@ func die():
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Weapon/CollisionShape2D.set_deferred("disabled", true)
 
-func _on_body_entered(_body):
-	die()
-
-func _on_weapon_area_entered(area):
-	if area.is_in_group("enemies"):
-		area.enemy_hit.emit()
-		area.queue_free()
+func _on_weapon_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies") and body.enemy_hit:
+		body.enemy_hit.emit()
+		body.queue_free()

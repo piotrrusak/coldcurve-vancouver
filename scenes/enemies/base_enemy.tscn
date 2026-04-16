@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dcl8vv0ppdojc"]
 
-[ext_resource type="Script" uid="uid://dm8g8pn36jujw" path="res://base_enemy.gd" id="1"]
+[ext_resource type="Script" uid="uid://dm8g8pn36jujw" path="res://scripts/enemies/base_enemy.gd" id="1"]
 
 [sub_resource type="Gradient" id="Gradient_8fkgw"]
 interpolation_mode = 1
@@ -13,7 +13,9 @@ fill = 2
 fill_from = Vector2(1, 1)
 fill_to = Vector2(1, 1)
 
-[node name="BaseEnemy" type="Area2D" unique_id=1294299636 groups=["enemies"]]
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=688829593 groups=["enemies"]]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1")
 strafe_speed = 100.0
 metadata/_edit_group_ = true
@@ -29,5 +31,4 @@ polygon = PackedVector2Array(28, 1, 18, 13, 3, 13, 12, 24, 2, 39, 19, 38, 27, 49
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=312847561]
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
