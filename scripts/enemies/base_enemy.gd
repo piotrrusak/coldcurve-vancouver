@@ -3,53 +3,48 @@ extends CharacterBody2D
 signal enemy_hit
 
 @export var strafe_speed: float = 180.0
+@export var in_investigate_speed_multiplier: float = 2.0
 @export var shoot_interval: float = 2.0
+@export var fov: float = 60.0
+@export var sight_range: float = 500.0
+@export var los_grace_period: float = 5.0
 @export var projectile_scene: PackedScene = preload("res://scenes/enemies/enemy_projectiles/projectile.tscn")
 
-var _player: Node2D = null
-var _strafe_dir: float = 1.0
-var _aim_endpoint: Vector2 = Vector2.ZERO
-var _has_los: bool = false
+@onready var _state       := $Services/StateService
+@onready var _sight       := $Services/SightService
+@onready var _search      := $Services/SearchService
+@onready var _investigate := $Services/InvestigateService
+@onready var _engage      := $Services/EngageService
 
 func _ready():
-	_player = get_tree().get_first_node_in_group("player")
-	_strafe_dir = 1.0 if randf() > 0.5 else -1.0
 	$ShootTimer.wait_time = shoot_interval
 	$ShootTimer.start()
 
 func _process(delta):
-	queue_redraw()
-	if _player == null or not _player.visible:
-		_has_los = false
+	if _state.player == null or not _state.player.visible:
+		_state.enter_search()
+		_sight.update_cone()
 		return
-	var to_player = _player.global_position - global_position
-	var strafe = to_player.normalized().rotated(PI / 2.0) * _strafe_dir
-	global_position += strafe * strafe_speed * delta
 
-	var space = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, _player.global_position)
-	query.exclude = [self.get_rid()]
-	query.collision_mask = 3  # walls (1) + player (2)
-	var result = space.intersect_ray(query)
-	if result.is_empty():
-		_aim_endpoint = _player.global_position
-		_has_los = false
-	else:
-		_aim_endpoint = result["position"]
-		_has_los = result["collider"].is_in_group("player")
+	match _state.state:
+		StateService.State.SEARCH:
+			_search.process(delta)
+		StateService.State.INVESTIGATE:
+			_investigate.process(delta)
+		StateService.State.ENGAGE:
+			_engage.process(delta)
 
-func _draw():
-	if _player == null or not _player.visible:
-		return
-	draw_line(Vector2.ZERO, to_local(_aim_endpoint), Color.RED, 1.5)
+	_sight.update_cone()
 
 func _on_shoot_timer_timeout():
-	if _player == null or not _player.visible:
+	if _state.state != StateService.State.ENGAGE:
 		return
-	if not _has_los:
+	if _state.player == null or not _state.player.visible:
 		return
-	var projectile = projectile_scene.instantiate()
-	var dir = (_player.global_position - global_position).normalized()
+	if not _sight.player_in_sight():
+		return
+	var projectile := projectile_scene.instantiate()
+	var dir: Vector2 = (_state.player.global_position - global_position).normalized()
 	projectile.global_position = global_position
 	projectile.rotation = dir.angle()
 	projectile.linear_velocity = dir * projectile.base_speed
