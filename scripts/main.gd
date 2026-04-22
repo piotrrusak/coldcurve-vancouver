@@ -12,7 +12,6 @@ func new_game():
 	get_tree().call_group("enemies", "queue_free")
 	score = 0
 	$Player.start($StartPosition.position)
-	$StartTimer.start()
 	$HUD.update_score(score)
 
 func _on_enemy_timer_timeout():
