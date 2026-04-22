@@ -2,13 +2,23 @@ extends CharacterBody2D
 
 signal enemy_hit
 
-@export var strafe_speed: float = 180.0
-@export var in_investigate_speed_multiplier: float = 2.0
-@export var shoot_interval: float = 2.0
+@export var movement_speed: float = 180.0
+@export var strafe_distance: float = 150.0
+@export var shoot_interval: float = 0.5
 @export var fov: float = 60.0
 @export var sight_range: float = 500.0
 @export var los_grace_period: float = 5.0
+@export var search_accuracy: float = 64.0
+@export var search_random_range: float = 300.0
+@export var search_snap_threshold: float = 100.0
+@export var turn_speed_deg: float = 240.0
+@export var search_pause_interval_min: float = 3.0
+@export var search_pause_interval_max: float = 8.0
+# 1 full spin @ 90deg/s (default speed)
+@export var search_pause_duration: float = 4.0
 @export var projectile_scene: PackedScene = preload("res://scenes/enemies/enemy_projectiles/projectile.tscn")
+
+@export var pathfinding_goal: Node = null
 
 @onready var _state       := $Services/StateService
 @onready var _sight       := $Services/SightService
@@ -20,10 +30,11 @@ func _ready():
 	$ShootTimer.wait_time = shoot_interval
 	$ShootTimer.start()
 
-func _process(delta):
+func _physics_process(delta):
 	if _state.player == null or not _state.player.visible:
 		_state.enter_search()
 		_sight.update_cone()
+		move_and_slide()
 		return
 
 	match _state.state:
@@ -35,6 +46,7 @@ func _process(delta):
 			_engage.process(delta)
 
 	_sight.update_cone()
+	move_and_slide()
 
 func _on_shoot_timer_timeout():
 	if _state.state != StateService.State.ENGAGE:

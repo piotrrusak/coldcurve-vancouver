@@ -18,7 +18,7 @@ func _on_enemy_timer_timeout():
 	var enemy = enemy_scene.instantiate()
 	var spawn_location = $EnemyPath/EnemySpawnLocation
 	spawn_location.progress_ratio = randf()
-	enemy.position = spawn_location.position
+	enemy.position = spawn_location.global_position
 	enemy.enemy_hit.connect(_on_enemy_killed)
 	add_child(enemy)
 
