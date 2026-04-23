@@ -2,6 +2,8 @@ extends CanvasLayer
 
 signal start_game
 
+const OptionsScene = preload("res://scenes/options/options.tscn")
+
 func show_game_over():
 	$StartButton.show()
 	$OptionsButton.show()
@@ -19,7 +21,8 @@ func _on_start_button_pressed():
 	start_game.emit()
 
 func _on_options_button_pressed():
-	pass
+	var options = OptionsScene.instantiate()
+	get_tree().root.add_child(options)
 
 func _on_exit_button_pressed():
 	get_tree().quit()
