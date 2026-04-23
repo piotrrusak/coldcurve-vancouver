@@ -58,7 +58,6 @@ position = Vector2(641, 360)
 
 [node name="EnemyTimer" type="Timer" parent="." unique_id=536536802]
 wait_time = 5.0
-one_shot = true
 autostart = true
 
 [node name="StartPosition" type="Marker2D" parent="." unique_id=828276842]
