@@ -20,18 +20,6 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="SpawnRateLabel" type="Label" parent="Container"]
-theme_override_font_sizes/font_size = 30
-text = "Enemy Spawn Rate: 5s"
-horizontal_alignment = 1
-
-[node name="SpawnRateSlider" type="HSlider" parent="Container"]
-custom_minimum_size = Vector2(400, 40)
-min_value = 1.0
-max_value = 10.0
-step = 1.0
-value = 5.0
-
 [node name="BulletSpeedLabel" type="Label" parent="Container"]
 theme_override_font_sizes/font_size = 30
 text = "Bullet Speed: 1.0x"
@@ -48,6 +36,5 @@ value = 1.0
 theme_override_font_sizes/font_size = 60
 text = "Back"
 
-[connection signal="value_changed" from="Container/SpawnRateSlider" to="." method="_on_spawn_rate_slider_value_changed"]
 [connection signal="value_changed" from="Container/BulletSpeedSlider" to="." method="_on_bullet_speed_slider_value_changed"]
 [connection signal="pressed" from="Container/BackButton" to="." method="_on_back_button_pressed"]
