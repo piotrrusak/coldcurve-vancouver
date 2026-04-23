@@ -8,16 +8,25 @@ var spawn_rate: float = 5.0
 func _ready():
 	spawn_rate = GameSettings.enemy_spawn_rate
 	$Container/SpawnRateSlider.value = spawn_rate
-	_update_label(spawn_rate)
+	_update_spawn_label(spawn_rate)
+	$Container/BulletSpeedSlider.value = GameSettings.bullet_speed_multiplier
+	_update_bullet_label(GameSettings.bullet_speed_multiplier)
 
 func _on_spawn_rate_slider_value_changed(value: float):
 	spawn_rate = value
 	GameSettings.enemy_spawn_rate = value
-	_update_label(value)
+	_update_spawn_label(value)
 	spawn_rate_changed.emit(value)
 
-func _update_label(value: float):
+func _on_bullet_speed_slider_value_changed(value: float):
+	GameSettings.bullet_speed_multiplier = value
+	_update_bullet_label(value)
+
+func _update_spawn_label(value: float):
 	$Container/SpawnRateLabel.text = "Enemy Spawn Rate: %ds" % int(value)
+
+func _update_bullet_label(value: float):
+	$Container/BulletSpeedLabel.text = "Bullet Speed: %.1fx" % value
 
 func _on_back_button_pressed():
 	back.emit()
