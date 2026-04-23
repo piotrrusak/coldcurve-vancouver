@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dcl8vv0ppdojc"]
 
 [ext_resource type="Script" uid="uid://dm8g8pn36jujw" path="res://scripts/enemies/base_enemy.gd" id="1"]
-[ext_resource type="Script" uid="uid://c28fd2ixmmumn" path="res://scenes/enemies/base_enemy_services/state_service.gd" id="2"]
-[ext_resource type="Script" uid="uid://bh13dj6hqkxbw" path="res://scenes/enemies/base_enemy_services/sight_service.gd" id="3"]
-[ext_resource type="Script" uid="uid://dl0aevpwywgs8" path="res://scenes/enemies/base_enemy_services/search_service.gd" id="4"]
-[ext_resource type="Script" uid="uid://b8hnep5grcb5a" path="res://scenes/enemies/base_enemy_services/investigate_service.gd" id="5"]
-[ext_resource type="Script" uid="uid://bd1xtm764umpb" path="res://scenes/enemies/base_enemy_services/engage_service.gd" id="6"]
+[ext_resource type="Script" uid="uid://c28fd2ixmmumn" path="res://scripts/enemies/base_enemy_services/state_service.gd" id="2"]
+[ext_resource type="Script" uid="uid://bh13dj6hqkxbw" path="res://scripts/enemies/base_enemy_services/sight_service.gd" id="3"]
+[ext_resource type="Script" uid="uid://dl0aevpwywgs8" path="res://scripts/enemies/base_enemy_services/search_service.gd" id="4"]
+[ext_resource type="Script" uid="uid://b8hnep5grcb5a" path="res://scripts/enemies/base_enemy_services/investigate_service.gd" id="5"]
+[ext_resource type="Script" uid="uid://bd1xtm764umpb" path="res://scripts/enemies/base_enemy_services/engage_service.gd" id="6"]
 
 [sub_resource type="Gradient" id="Gradient_8fkgw"]
 interpolation_mode = 1
@@ -21,9 +21,8 @@ fill_to = Vector2(1, 1)
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=688829593 groups=["enemies"]]
 z_index = 3
 collision_layer = 4
-collision_mask = 0
 script = ExtResource("1")
-strafe_speed = 100.0
+movement_speed = 100.0
 metadata/_edit_group_ = true
 
 [node name="SightCone" type="Polygon2D" parent="." unique_id=591023847]
@@ -40,6 +39,9 @@ position = Vector2(-28.4, -24.599998)
 polygon = PackedVector2Array(28, 1, 18, 13, 3, 13, 12, 24, 2, 39, 19, 38, 27, 49, 36, 39, 53, 39, 44, 26, 54, 13, 38, 13)
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=312847561]
+
+[node name="SearchPauseTimer" type="Timer" parent="." unique_id=748291035]
+one_shot = true
 
 [node name="Services" type="Node" parent="." unique_id=1067085621]
 
@@ -58,4 +60,9 @@ script = ExtResource("5")
 [node name="EngageService" type="Node" parent="Services" unique_id=39064468]
 script = ExtResource("6")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1516493202]
+target_desired_distance = 40.0
+debug_enabled = true
+
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="SearchPauseTimer" to="Services/SearchService" method="_on_search_pause_timer_timeout"]
