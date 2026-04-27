@@ -56,9 +56,6 @@ navigation_polygon = SubResource("NavigationPolygon_tefeu")
 [node name="Player" parent="." unique_id=1717736480 instance=ExtResource("3_tefeu")]
 position = Vector2(641, 360)
 
-[node name="EnemyTimer" type="Timer" parent="." unique_id=536536802]
-wait_time = 5.0
-
 [node name="StartPosition" type="Marker2D" parent="." unique_id=828276842]
 position = Vector2(963, 713)
 
@@ -73,5 +70,4 @@ position = Vector2(-0.13856266, -0.00022012464)
 [node name="HUD" parent="." unique_id=1565994411 instance=ExtResource("4_o6xl0")]
 
 [connection signal="hit" from="Player" to="." method="game_over"]
-[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]

@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cgamefin12345"]
+
+[ext_resource type="Script" uid="uid://sgamefin1234" path="res://scripts/game_finished.gd" id="1"]
+
+[node name="GameFinished" type="CanvasLayer" unique_id=200001001]
+process_mode = 3
+script = ExtResource("1")
+
+[node name="GameFinishedLabel" type="Label" parent="." unique_id=200001002]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 270.0
+offset_bottom = 355.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = "Game Finished!"
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="." unique_id=200001003]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -310.0
+offset_right = 90.0
+offset_bottom = -220.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "Play Again"
+
+[node name="OptionsButton" type="Button" parent="." unique_id=200001004]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -210.0
+offset_right = 90.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="." unique_id=200001005]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -110.0
+offset_right = 90.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "Exit"
+
+[connection signal="pressed" from="PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
