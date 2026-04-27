@@ -27,6 +27,7 @@ signal enemy_hit
 @onready var _engage      := $Services/EngageService
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	$ShootTimer.wait_time = shoot_interval
 	$ShootTimer.start()
 

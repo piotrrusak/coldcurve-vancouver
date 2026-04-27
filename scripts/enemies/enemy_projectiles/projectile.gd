@@ -2,6 +2,9 @@ extends RigidBody2D
 
 @export var base_speed = 500.0
 
+func _ready():
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+
 func get_projectile_speed():
 	var s = base_speed * GameSettings.bullet_speed_multiplier
 	return Vector2(randf_range(s, s * 1.25), 0.0)
