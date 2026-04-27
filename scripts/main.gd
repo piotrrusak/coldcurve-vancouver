@@ -47,13 +47,13 @@ func new_game():
 	score = 0
 	current_level = 0
 	_clearing = false
-	$Player.start($StartPosition.position)
 	$HUD.update_score(score)
 	start_level()
 
 func start_level():
 	get_tree().call_group("projectiles", "queue_free")
 	get_tree().call_group("enemies", "queue_free")
+	$Player.start($StartPosition.position)
 	_clearing = false
 	var positions = LEVEL_SPAWNS[current_level]
 	enemies_remaining = positions.size()
