@@ -9,6 +9,9 @@ const OptionsScene = preload("res://scenes/options/options.tscn")
 
 var _pause_menu: CanvasLayer = null
 var _playing := false
+var _countdown_overlay: CanvasLayer = null
+var _countdown_label: Label = null
+var _countdown_count: int = 0
 
 const LEVEL_SPAWNS = [
 	[
@@ -46,7 +49,9 @@ func _ready():
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel") and _playing:
-		if _pause_menu:
+		if _countdown_overlay:
+			pass
+		elif _pause_menu:
 			_resume()
 		else:
 			_open_pause_menu()
@@ -59,10 +64,46 @@ func _open_pause_menu():
 	add_child(_pause_menu)
 
 func _resume():
-	get_tree().paused = false
 	if _pause_menu:
 		_pause_menu.queue_free()
 		_pause_menu = null
+	_start_countdown()
+
+func _unpause():
+	get_tree().paused = false
+
+func _start_countdown():
+	_countdown_overlay = CanvasLayer.new()
+	_countdown_overlay.process_mode = Node.PROCESS_MODE_ALWAYS
+	_countdown_overlay.layer = 10
+	add_child(_countdown_overlay)
+
+	_countdown_label = Label.new()
+	_countdown_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_countdown_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_countdown_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_countdown_label.add_theme_font_size_override("font_size", 200)
+	_countdown_overlay.add_child(_countdown_label)
+
+	_countdown_count = 3
+	_countdown_label.text = str(_countdown_count)
+
+	var timer := Timer.new()
+	timer.process_mode = Node.PROCESS_MODE_ALWAYS
+	timer.wait_time = 1.0
+	timer.timeout.connect(_on_countdown_tick)
+	_countdown_overlay.add_child(timer)
+	timer.start()
+
+func _on_countdown_tick():
+	_countdown_count -= 1
+	if _countdown_count <= 0:
+		_countdown_overlay.queue_free()
+		_countdown_overlay = null
+		_countdown_label = null
+		_unpause()
+	else:
+		_countdown_label.text = str(_countdown_count)
 
 func _open_options_from_pause():
 	var options = OptionsScene.instantiate()
@@ -71,7 +112,10 @@ func _open_options_from_pause():
 
 func game_over():
 	_playing = false
-	_resume()
+	if _pause_menu:
+		_pause_menu.queue_free()
+		_pause_menu = null
+	_unpause()
 	$HUD.show_game_over()
 
 func new_game():
