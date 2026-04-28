@@ -59,7 +59,7 @@ func _on_shoot_timer_timeout():
 	var dir: Vector2 = (_state.player.global_position - global_position).normalized()
 	projectile.global_position = global_position
 	projectile.rotation = dir.angle()
-	projectile.linear_velocity = dir * projectile.base_speed
+	projectile.linear_velocity = dir * projectile.base_speed * GameSettings.bullet_speed_multiplier
 	get_parent().add_child(projectile)
 
 func _on_area_entered(area):

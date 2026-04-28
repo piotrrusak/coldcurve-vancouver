@@ -2,8 +2,9 @@ extends RigidBody2D
 
 @export var base_speed = 500.0
 
-func get_projectile_speed(): 
-	return Vector2(randf_range(base_speed, base_speed * 1.25), 0.0)
+func get_projectile_speed():
+	var s = base_speed * GameSettings.bullet_speed_multiplier
+	return Vector2(randf_range(s, s * 1.25), 0.0)
 
 func _draw():
 	# Triangle pointing forward (+X direction), rotated by parent

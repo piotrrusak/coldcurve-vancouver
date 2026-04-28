@@ -13,6 +13,8 @@ func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$HUD.update_score(score)
+	$EnemyTimer.wait_time = GameSettings.enemy_spawn_rate
+	$EnemyTimer.start()
 
 func _on_enemy_timer_timeout():
 	var enemy = enemy_scene.instantiate()
@@ -25,6 +27,3 @@ func _on_enemy_timer_timeout():
 func _on_enemy_killed():
 	score += 1
 	$HUD.update_score(score)
-
-func _on_start_timer_timeout():
-	$EnemyTimer.start()
