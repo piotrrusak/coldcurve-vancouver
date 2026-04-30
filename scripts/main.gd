@@ -107,8 +107,9 @@ func _on_countdown_tick():
 		_countdown_label.text = str(_countdown_count)
 
 func _open_options_from_pause():
+	_pause_menu.hide()
 	var options = OptionsScene.instantiate()
-	options.back.connect(func(): options.queue_free())
+	options.back.connect(func(): _pause_menu.show())
 	add_child(options)
 
 func game_over():
