@@ -40,6 +40,7 @@ const LEVEL_SPAWNS = [
 ]
 
 var score: int
+var score_at_level_start: int
 var current_level: int
 var enemies_remaining: int
 var _clearing := false
@@ -115,6 +116,10 @@ func game_over():
 	if _pause_menu:
 		_pause_menu.queue_free()
 		_pause_menu = null
+	if _countdown_overlay:
+		_countdown_overlay.queue_free()
+		_countdown_overlay = null
+		_countdown_label = null
 	_unpause()
 	$HUD.show_game_over()
 
@@ -123,13 +128,18 @@ func new_game():
 	get_tree().paused = false
 	get_tree().call_group("projectiles", "queue_free")
 	get_tree().call_group("enemies", "queue_free")
-	score = 0
-	current_level = 0
+	score = score_at_level_start
 	_clearing = false
 	$HUD.update_score(score)
 	start_level()
 
+func full_reset():
+	current_level = 0
+	score_at_level_start = 0
+	new_game()
+
 func start_level():
+	score_at_level_start = score
 	get_tree().call_group("projectiles", "queue_free")
 	get_tree().call_group("enemies", "queue_free")
 	$Player.start($StartPosition.position)
@@ -155,7 +165,7 @@ func _on_level_cleared():
 	get_tree().paused = true
 	if current_level + 1 >= LEVEL_SPAWNS.size():
 		var screen = GameFinishedScene.instantiate()
-		screen.play_again.connect(new_game)
+		screen.play_again.connect(full_reset)
 		add_child(screen)
 	else:
 		var screen = LevelCompleteScene.instantiate()
