@@ -47,6 +47,7 @@ func _physics_process(delta):
 			_engage.process(delta)
 
 	_sight.update_cone()
+	velocity *= GameSettings.enemy_speed_multiplier
 	move_and_slide()
 
 func _on_shoot_timer_timeout():

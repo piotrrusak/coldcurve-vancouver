@@ -13,9 +13,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = -120.0
+offset_top = -180.0
 offset_right = 200.0
-offset_bottom = 120.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -32,9 +32,35 @@ max_value = 2.0
 step = 0.1
 value = 1.0
 
+[node name="PlayerSpeedLabel" type="Label" parent="Container"]
+theme_override_font_sizes/font_size = 30
+text = "Player Speed: 1.0x"
+horizontal_alignment = 1
+
+[node name="PlayerSpeedSlider" type="HSlider" parent="Container"]
+custom_minimum_size = Vector2(400, 40)
+min_value = 0.5
+max_value = 1.5
+step = 0.1
+value = 1.0
+
+[node name="EnemySpeedLabel" type="Label" parent="Container"]
+theme_override_font_sizes/font_size = 30
+text = "Enemy Speed: 1.0x"
+horizontal_alignment = 1
+
+[node name="EnemySpeedSlider" type="HSlider" parent="Container"]
+custom_minimum_size = Vector2(400, 40)
+min_value = 0.5
+max_value = 2.0
+step = 0.1
+value = 1.0
+
 [node name="BackButton" type="Button" parent="Container"]
 theme_override_font_sizes/font_size = 60
 text = "Back"
 
 [connection signal="value_changed" from="Container/BulletSpeedSlider" to="." method="_on_bullet_speed_slider_value_changed"]
+[connection signal="value_changed" from="Container/PlayerSpeedSlider" to="." method="_on_player_speed_slider_value_changed"]
+[connection signal="value_changed" from="Container/EnemySpeedSlider" to="." method="_on_enemy_speed_slider_value_changed"]
 [connection signal="pressed" from="Container/BackButton" to="." method="_on_back_button_pressed"]
