@@ -27,6 +27,7 @@ signal enemy_hit
 @onready var _engage      := $Services/EngageService
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	$ShootTimer.wait_time = shoot_interval
 	$ShootTimer.start()
 
@@ -46,6 +47,7 @@ func _physics_process(delta):
 			_engage.process(delta)
 
 	_sight.update_cone()
+	velocity *= GameSettings.enemy_speed_multiplier
 	move_and_slide()
 
 func _on_shoot_timer_timeout():

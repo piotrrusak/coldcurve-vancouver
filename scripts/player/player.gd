@@ -6,6 +6,7 @@ signal hit
 var screen_size
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	screen_size = get_viewport_rect().size
 	hide()
 
@@ -29,6 +30,8 @@ func _draw():
 	draw_colored_polygon(PackedVector2Array([p1, p2, p3, p4]), Color.CYAN)
 
 func _physics_process(_delta):
+	if not visible:
+		return
 	var dir = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
 		dir.x += 1
@@ -39,7 +42,7 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("move_up"):
 		dir.y -= 1
 
-	velocity = dir.normalized() * speed if dir.length() > 0 else Vector2.ZERO
+	velocity = dir.normalized() * speed * GameSettings.player_speed_multiplier if dir.length() > 0 else Vector2.ZERO
 	move_and_slide()
 	position = position.clamp(Vector2.ZERO, screen_size * 10)
 
