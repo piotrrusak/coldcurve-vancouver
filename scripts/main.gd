@@ -10,6 +10,7 @@ const OptionsScene = preload("res://scenes/options/options.tscn")
 const LEVEL_MAPS = [
 	preload("res://scenes/map/level1_map.tscn"),
 	preload("res://scenes/map/level2_map.tscn"),
+	preload("res://scenes/map/level3_map.tscn"),
 ]
 
 var _current_map: Node = null
@@ -29,6 +30,20 @@ const LEVEL_SPAWNS = [
 		Vector2(1650, 850),
 		Vector2(550, 1200),
 		Vector2(1550, 1200),
+	],
+	[
+		Vector2(550, 400),
+		Vector2(1050, 350),
+		Vector2(1550, 400),
+		Vector2(450, 850),
+		Vector2(1650, 850),
+		Vector2(550, 1200),
+		Vector2(1550, 1200),
+		Vector2(1050, 1200),
+		Vector2(750, 650),
+		Vector2(1350, 650),
+		Vector2(650, 1000),
+		Vector2(1450, 1000),
 	],
 	[
 		Vector2(550, 400),
