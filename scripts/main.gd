@@ -159,6 +159,12 @@ func _on_game_over_main_menu():
 	get_tree().paused = false
 	get_tree().call_group("projectiles", "queue_free")
 	get_tree().call_group("enemies", "queue_free")
+	if _current_map:
+		_current_map.queue_free()
+		_current_map = null
+	score = 0
+	score_at_level_start = 0
+	$HUD.update_score(0)
 	_playing = false
 	$HUD.show_menu()
 
