@@ -4,6 +4,7 @@ extends Node
 
 const LevelCompleteScene = preload("res://scenes/level_complete.tscn")
 const GameFinishedScene = preload("res://scenes/game_finished.tscn")
+const GameOverScene = preload("res://scenes/game_over.tscn")
 const PauseMenuScene = preload("res://scenes/pause_menu.tscn")
 const OptionsScene = preload("res://scenes/options/options.tscn")
 
@@ -143,8 +144,23 @@ func game_over():
 		_countdown_overlay.queue_free()
 		_countdown_overlay = null
 		_countdown_label = null
-	_unpause()
-	$HUD.show_game_over()
+	get_tree().paused = true
+	var screen = GameOverScene.instantiate()
+	screen.restart.connect(_on_game_over_restart)
+	screen.main_menu.connect(_on_game_over_main_menu)
+	add_child(screen)
+
+func _on_game_over_restart():
+	get_tree().paused = false
+	_playing = true
+	new_game()
+
+func _on_game_over_main_menu():
+	get_tree().paused = false
+	get_tree().call_group("projectiles", "queue_free")
+	get_tree().call_group("enemies", "queue_free")
+	_playing = false
+	$HUD.show_menu()
 
 func new_game():
 	_playing = true

@@ -1,21 +1,30 @@
-[gd_scene format=3 uid="uid://dkfkhouadqb2i"]
+[gd_scene format=3 uid="uid://game_over_scene1"]
 
-[ext_resource type="Script" uid="uid://ftxkif44n7bd" path="res://scripts/Chud/hud.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1"]
 
-[node name="HUD" type="CanvasLayer" unique_id=845335180]
+[node name="GameOver" type="CanvasLayer" unique_id=300001001]
+process_mode = 3
 script = ExtResource("1")
 
-[node name="ScoreLabel" type="Label" parent="." unique_id=389279932]
+[node name="Background" type="ColorRect" parent="." unique_id=300001002]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="GameOverLabel" type="Label" parent="." unique_id=300001003]
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 2.0
-offset_bottom = 85.0
+offset_top = 200.0
+offset_bottom = 290.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 60
-text = "0"
+theme_override_font_sizes/font_size = 72
+text = "Game Over"
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="." unique_id=104712213]
+[node name="RestartButton" type="Button" parent="." unique_id=300001004]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -28,9 +37,9 @@ offset_bottom = -320.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 60
-text = "Start"
+text = "Restart"
 
-[node name="LevelSelectButton" type="Button" parent="." unique_id=114712213]
+[node name="OptionsButton" type="Button" parent="." unique_id=300001005]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -43,9 +52,9 @@ offset_bottom = -220.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 60
-text = "Level Select"
+text = "Options"
 
-[node name="OptionsButton" type="Button" parent="." unique_id=204712213]
+[node name="MainMenuButton" type="Button" parent="." unique_id=300001006]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -58,9 +67,9 @@ offset_bottom = -120.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 60
-text = "Options"
+text = "Main Menu"
 
-[node name="ExitButton" type="Button" parent="." unique_id=304712213]
+[node name="ExitButton" type="Button" parent="." unique_id=300001007]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -75,11 +84,7 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 60
 text = "Exit"
 
-[node name="MessageTimer" type="Timer" parent="." unique_id=1511048636]
-wait_time = 2.0
-one_shot = true
-
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
