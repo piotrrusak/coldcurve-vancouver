@@ -162,6 +162,7 @@ func _on_game_over_main_menu():
 	if _current_map:
 		_current_map.queue_free()
 		_current_map = null
+	$Player.hide()
 	score = 0
 	score_at_level_start = 0
 	$HUD.update_score(0)
@@ -223,7 +224,7 @@ func _on_level_cleared():
 	get_tree().paused = true
 	if current_level + 1 >= LEVEL_SPAWNS.size():
 		var screen = GameFinishedScene.instantiate()
-		screen.play_again.connect(full_reset)
+		screen.main_menu.connect(_on_game_over_main_menu)
 		add_child(screen)
 	else:
 		var screen = LevelCompleteScene.instantiate()

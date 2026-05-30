@@ -1,11 +1,11 @@
 extends CanvasLayer
 
-signal play_again
+signal main_menu
 
 const OptionsScene = preload("res://scenes/options/options.tscn")
 
-func _on_play_again_button_pressed():
-	play_again.emit()
+func _on_main_menu_button_pressed():
+	main_menu.emit()
 	queue_free()
 
 func _on_options_button_pressed():
@@ -21,11 +21,11 @@ func _on_exit_button_pressed():
 	get_tree().quit()
 
 func _show_buttons():
-	$PlayAgainButton.show()
+	$MainMenuButton.show()
 	$OptionsButton.show()
 	$ExitButton.show()
 
 func _hide_buttons():
-	$PlayAgainButton.hide()
+	$MainMenuButton.hide()
 	$OptionsButton.hide()
 	$ExitButton.hide()
