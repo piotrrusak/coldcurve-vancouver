@@ -7,6 +7,13 @@ const GameFinishedScene = preload("res://scenes/game_finished.tscn")
 const PauseMenuScene = preload("res://scenes/pause_menu.tscn")
 const OptionsScene = preload("res://scenes/options/options.tscn")
 
+const LEVEL_MAPS = [
+	preload("res://scenes/map/level1_map.tscn"),
+	preload("res://scenes/map/level2_map.tscn"),
+]
+
+var _current_map: Node = null
+
 var _pause_menu: CanvasLayer = null
 var _playing := false
 var _countdown_overlay: CanvasLayer = null
@@ -139,10 +146,18 @@ func full_reset():
 	score_at_level_start = 0
 	new_game()
 
+func _swap_map(level: int):
+	if _current_map:
+		_current_map.queue_free()
+		_current_map = null
+	_current_map = LEVEL_MAPS[level].instantiate()
+	$Map.add_child(_current_map)
+
 func start_level():
 	score_at_level_start = score
 	get_tree().call_group("projectiles", "queue_free")
 	get_tree().call_group("enemies", "queue_free")
+	_swap_map(current_level)
 	$Player.start($StartPosition.position)
 	_clearing = false
 	var positions = LEVEL_SPAWNS[current_level]
