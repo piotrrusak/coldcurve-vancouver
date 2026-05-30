@@ -12,6 +12,7 @@ const LEVEL_MAPS = [
 	preload("res://scenes/map/level1_map.tscn"),
 	preload("res://scenes/map/level2_map.tscn"),
 	preload("res://scenes/map/level3_map.tscn"),
+	preload("res://scenes/map/level4_map.tscn"),
 ]
 
 var _current_map: Node = null
@@ -25,6 +26,7 @@ var _countdown_count: int = 0
 const LEVEL_START_POSITIONS = [
 	Vector2(963, 713),
 	Vector2(963, 713),
+	Vector2(1664, 256),
 	Vector2(1664, 256),
 ]
 
@@ -51,6 +53,21 @@ const LEVEL_SPAWNS = [
 		Vector2(1350, 650),
 		Vector2(650, 1000),
 		Vector2(1450, 1000),
+	],
+	[
+		Vector2(500, 650), Vector2(1200, 700), Vector2(2100, 650), Vector2(2900, 700),
+		Vector2(1408, 1000),
+		Vector2(550, 1350), Vector2(700, 1700), Vector2(1050, 1350), Vector2(550, 1850),
+		Vector2(1700, 1350), Vector2(2400, 1700), Vector2(2900, 1350), Vector2(1800, 1850),
+		Vector2(500, 2100), Vector2(1300, 2200), Vector2(2100, 2100), Vector2(2900, 2200),
+		Vector2(600, 2600), Vector2(1500, 2500), Vector2(2400, 2600), Vector2(2850, 2500),
+		Vector2(3060, 2950),
+		Vector2(550, 3200), Vector2(1400, 3350), Vector2(2300, 3200),
+		Vector2(700, 3550), Vector2(1800, 3550), Vector2(2750, 3400),
+		Vector2(1792, 3850),
+		Vector2(700, 4150), Vector2(2300, 4150),
+		Vector2(500, 4600), Vector2(2200, 4600),
+		Vector2(900, 4900), Vector2(2000, 4950),
 	],
 	[
 		Vector2(500, 650), Vector2(1200, 700), Vector2(2100, 650), Vector2(2900, 700),
