@@ -161,6 +161,11 @@ func full_reset():
 	score_at_level_start = 0
 	new_game()
 
+func start_game_at_level(level: int):
+	current_level = level
+	score_at_level_start = 0
+	new_game()
+
 func _swap_map(level: int):
 	if _current_map:
 		_current_map.queue_free()

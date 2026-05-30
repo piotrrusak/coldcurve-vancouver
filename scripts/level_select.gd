@@ -1,0 +1,17 @@
+extends CanvasLayer
+
+signal level_selected(level: int)
+signal back
+
+func _on_level1_pressed():
+	level_selected.emit(0)
+
+func _on_level2_pressed():
+	level_selected.emit(1)
+
+func _on_level3_pressed():
+	level_selected.emit(2)
+
+func _on_back_pressed():
+	back.emit()
+	queue_free()

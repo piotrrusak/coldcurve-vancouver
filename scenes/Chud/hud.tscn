@@ -35,13 +35,28 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -90.0
+offset_top = -410.0
+offset_right = 90.0
+offset_bottom = -320.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "Start"
+
+[node name="LevelSelectButton" type="Button" parent="." unique_id=114712213]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
 offset_top = -310.0
 offset_right = 90.0
 offset_bottom = -220.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 60
-text = "Start"
+text = "Level Select"
 
 [node name="OptionsButton" type="Button" parent="." unique_id=204712213]
 anchors_preset = 7
@@ -78,6 +93,7 @@ wait_time = 2.0
 one_shot = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

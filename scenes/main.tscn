@@ -34,4 +34,4 @@ position = Vector2(-0.13856266, -0.00022012464)
 [node name="HUD" parent="." unique_id=1565994411 instance=ExtResource("4_o6xl0")]
 
 [connection signal="hit" from="Player" to="." method="game_over"]
-[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="start_game" from="HUD" to="." method="start_game_at_level"]
