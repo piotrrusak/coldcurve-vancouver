@@ -20,7 +20,7 @@ func _draw():
 	draw_colored_polygon(points, Color.RED)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and not GameSettings.immortality:
 		body.die()
 	queue_free()
 

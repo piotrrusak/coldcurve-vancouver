@@ -75,7 +75,7 @@ const LEVEL_SPAWNS = [
 		Vector2(550, 1350), Vector2(700, 1700), Vector2(1050, 1350), Vector2(550, 1850),
 		Vector2(1700, 1350), Vector2(2400, 1700), Vector2(2900, 1350), Vector2(1800, 1850),
 		Vector2(500, 2100), Vector2(1300, 2200), Vector2(2100, 2100), Vector2(2900, 2200),
-		Vector2(600, 2600), Vector2(1500, 2500), Vector2(2400, 2600), Vector2(2850, 2500),
+		Vector2(600, 2600), Vector2(1250, 2750), Vector2(2400, 2600), Vector2(2850, 2500),
 		Vector2(3060, 2950),
 		Vector2(550, 3200), Vector2(1400, 3350), Vector2(2300, 3200),
 		Vector2(700, 3550), Vector2(1800, 3550), Vector2(2750, 3400),
@@ -84,7 +84,7 @@ const LEVEL_SPAWNS = [
 		Vector2(500, 4600), Vector2(2200, 4600),
 		Vector2(900, 4900), Vector2(2000, 4950),
 		Vector2(750, 4000), Vector2(1100, 4500),
-		Vector2(1900, 4900), Vector2(2600, 4100), Vector2(2700, 4800),
+		Vector2(1900, 4900), Vector2(2600, 4100), Vector2(2700, 5250),
 	],
 ]
 
