@@ -22,6 +22,12 @@ var _countdown_overlay: CanvasLayer = null
 var _countdown_label: Label = null
 var _countdown_count: int = 0
 
+const LEVEL_START_POSITIONS = [
+	Vector2(963, 713),
+	Vector2(963, 713),
+	Vector2(1664, 256),
+]
+
 const LEVEL_SPAWNS = [
 	[
 		Vector2(550, 400),
@@ -206,7 +212,7 @@ func start_level():
 	get_tree().call_group("projectiles", "queue_free")
 	get_tree().call_group("enemies", "queue_free")
 	_swap_map(current_level)
-	$Player.start($StartPosition.position)
+	$Player.start(LEVEL_START_POSITIONS[current_level])
 	_clearing = false
 	var positions = LEVEL_SPAWNS[current_level]
 	enemies_remaining = positions.size()
