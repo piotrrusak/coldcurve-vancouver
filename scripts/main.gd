@@ -33,7 +33,7 @@ const LEVEL_START_POSITIONS = [
 	Vector2(320, 320),
 	Vector2(4416, 3904),
 	Vector2(2752, 5184),
-	Vector2(2752, 5184),
+	Vector2(320, 320),
 ]
 
 const LEVEL_SPAWNS = [
