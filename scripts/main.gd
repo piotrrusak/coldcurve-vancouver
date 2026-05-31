@@ -398,6 +398,7 @@ var score_at_level_start: int
 var current_level: int
 var enemies_remaining: int
 var _clearing := false
+var _enemy_arrows: CanvasLayer = null
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -493,6 +494,9 @@ func _on_game_over_main_menu():
 	if _current_map:
 		_current_map.queue_free()
 		_current_map = null
+	if _enemy_arrows:
+		_enemy_arrows.queue_free()
+		_enemy_arrows = null
 	$Player.hide()
 	score = 0
 	score_at_level_start = 0
@@ -527,6 +531,16 @@ func _swap_map(level: int):
 	_current_map = LEVEL_MAPS[level].instantiate()
 	$Map.add_child(_current_map)
 
+func _setup_enemy_arrows(total: int) -> void:
+	if _enemy_arrows:
+		_enemy_arrows.queue_free()
+	_enemy_arrows = CanvasLayer.new()
+	_enemy_arrows.layer = 5
+	var arrows_node = load("res://scripts/Chud/enemy_arrows.gd").new()
+	arrows_node.setup(total)
+	_enemy_arrows.add_child(arrows_node)
+	add_child(_enemy_arrows)
+
 func start_level():
 	score_at_level_start = score
 	get_tree().call_group("projectiles", "queue_free")
@@ -536,6 +550,7 @@ func start_level():
 	_clearing = false
 	var positions = LEVEL_SPAWNS[current_level]
 	enemies_remaining = positions.size()
+	_setup_enemy_arrows(enemies_remaining)
 	for pos in positions:
 		var enemy = enemy_scene.instantiate()
 		enemy.position = pos
