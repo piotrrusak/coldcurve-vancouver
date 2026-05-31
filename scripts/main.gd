@@ -35,7 +35,7 @@ const LEVEL_START_POSITIONS = [
 	Vector2(4416, 3904),
 	Vector2(2752, 5184),
 	Vector2(320, 320),
-	Vector2(320, 320),
+	Vector2(7360, 320),
 ]
 
 const LEVEL_SPAWNS = [
@@ -323,9 +323,9 @@ const LEVEL_SPAWNS = [
 	[
 		Vector2(704, 576), Vector2(960, 320), Vector2(1856, 320), Vector2(2624, 320),
 		Vector2(3392, 320), Vector2(4288, 320), Vector2(5056, 320), Vector2(5824, 320),
-		Vector2(6720, 320), Vector2(7360, 320), Vector2(320, 704), Vector2(960, 576),
+		Vector2(6720, 320), Vector2(6848, 320), Vector2(320, 704), Vector2(960, 576),
 		Vector2(1856, 576), Vector2(2624, 576), Vector2(3392, 576), Vector2(4288, 576),
-		Vector2(5056, 576), Vector2(5824, 576), Vector2(6720, 576), Vector2(7360, 576),
+		Vector2(5056, 576), Vector2(5824, 576), Vector2(6720, 576), Vector2(7360, 960),
 		Vector2(320, 1216), Vector2(1003, 1273), Vector2(1813, 1273), Vector2(2624, 1273),
 		Vector2(3435, 1273), Vector2(4245, 1273), Vector2(5056, 1273), Vector2(5867, 1273),
 		Vector2(6677, 1273), Vector2(7360, 1216), Vector2(320, 1856), Vector2(1003, 1813),
