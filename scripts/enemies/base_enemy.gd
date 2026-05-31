@@ -30,6 +30,7 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	$ShootTimer.wait_time = shoot_interval
 	$ShootTimer.start()
+	$SightCone.visible = GameSettings.show_sight_cones
 	if GameSettings.show_spawn_coords:
 		var label := Label.new()
 		label.text = "(%d, %d)" % [position.x, position.y]
@@ -41,7 +42,8 @@ func _ready():
 func _physics_process(delta):
 	if _state.player == null or not _state.player.visible:
 		_state.enter_search()
-		_sight.update_cone()
+		if GameSettings.show_sight_cones and Engine.get_physics_frames() % 3 == get_instance_id() % 3:
+			_sight.update_cone()
 		move_and_slide()
 		return
 
@@ -53,7 +55,8 @@ func _physics_process(delta):
 		StateService.State.ENGAGE:
 			_engage.process(delta)
 
-	_sight.update_cone()
+	if GameSettings.show_sight_cones and Engine.get_physics_frames() % 3 == get_instance_id() % 3:
+		_sight.update_cone()
 	velocity *= GameSettings.enemy_speed_multiplier
 	move_and_slide()
 

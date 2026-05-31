@@ -6,3 +6,4 @@ var player_speed_multiplier: float = 1.0
 var enemy_speed_multiplier: float = 1.0
 var immortality: bool = false
 var show_spawn_coords: bool = false
+var show_sight_cones: bool = true
