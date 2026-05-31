@@ -120,13 +120,28 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -90.0
+offset_top = -260.0
+offset_right = 90.0
+offset_bottom = -170.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "Level 7"
+
+[node name="Level8Button" type="Button" parent="." unique_id=100000012]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
 offset_top = -160.0
 offset_right = 90.0
 offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 60
-text = "Level 7"
+text = "Level 8"
 
 [node name="BackButton" type="Button" parent="." unique_id=100000007]
 anchors_preset = 7
@@ -150,4 +165,5 @@ text = "Back"
 [connection signal="pressed" from="Level5Button" to="." method="_on_level5_pressed"]
 [connection signal="pressed" from="Level6Button" to="." method="_on_level6_pressed"]
 [connection signal="pressed" from="Level7Button" to="." method="_on_level7_pressed"]
+[connection signal="pressed" from="Level8Button" to="." method="_on_level8_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_pressed"]
