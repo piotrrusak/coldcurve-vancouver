@@ -27,6 +27,10 @@ func _on_level6_pressed():
 	level_selected.emit(5)
 	queue_free()
 
+func _on_level7_pressed():
+	level_selected.emit(6)
+	queue_free()
+
 func _on_back_pressed():
 	back.emit()
 	queue_free()
