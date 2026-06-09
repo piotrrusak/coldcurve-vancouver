@@ -16,7 +16,7 @@ theme_override_font_sizes/font_size = 60
 text = "Game Finished!"
 horizontal_alignment = 1
 
-[node name="PlayAgainButton" type="Button" parent="." unique_id=200001003]
+[node name="MainMenuButton" type="Button" parent="." unique_id=200001003]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -29,7 +29,7 @@ offset_bottom = -220.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 60
-text = "Play Again"
+text = "Main Menu"
 
 [node name="OptionsButton" type="Button" parent="." unique_id=200001004]
 anchors_preset = 7
@@ -61,6 +61,6 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 60
 text = "Exit"
 
-[connection signal="pressed" from="PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

@@ -44,7 +44,6 @@ func _physics_process(_delta):
 
 	velocity = dir.normalized() * speed * GameSettings.player_speed_multiplier if dir.length() > 0 else Vector2.ZERO
 	move_and_slide()
-	position = position.clamp(Vector2.ZERO, screen_size * 10)
 
 func _process(_delta):
 	var mouse_local = get_local_mouse_position()

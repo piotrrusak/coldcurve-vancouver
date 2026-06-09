@@ -56,6 +56,14 @@ max_value = 2.0
 step = 0.1
 value = 1.0
 
+[node name="ImmortalityCheckBox" type="CheckBox" parent="Container"]
+theme_override_font_sizes/font_size = 30
+text = "Immortality"
+
+[node name="ShowSpawnCoordsCheckBox" type="CheckBox" parent="Container"]
+theme_override_font_sizes/font_size = 30
+text = "Show Spawn Coords"
+
 [node name="BackButton" type="Button" parent="Container"]
 theme_override_font_sizes/font_size = 60
 text = "Back"
@@ -63,4 +71,6 @@ text = "Back"
 [connection signal="value_changed" from="Container/BulletSpeedSlider" to="." method="_on_bullet_speed_slider_value_changed"]
 [connection signal="value_changed" from="Container/PlayerSpeedSlider" to="." method="_on_player_speed_slider_value_changed"]
 [connection signal="value_changed" from="Container/EnemySpeedSlider" to="." method="_on_enemy_speed_slider_value_changed"]
+[connection signal="toggled" from="Container/ImmortalityCheckBox" to="." method="_on_immortality_check_box_toggled"]
+[connection signal="toggled" from="Container/ShowSpawnCoordsCheckBox" to="." method="_on_show_spawn_coords_check_box_toggled"]
 [connection signal="pressed" from="Container/BackButton" to="." method="_on_back_button_pressed"]
