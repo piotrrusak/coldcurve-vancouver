@@ -115,7 +115,7 @@ Dźwięk / muzyka: brak w prezentowanej wersji.
 
 **Zachowanie postaci** — ręcznie zaprogramowana maszyna stanów (FSM): wrogowie działają na 3-stanowej FSM zaimplementowanej w GDScript. Pathfinding oparty na NavMesh Godota. Nie użyto żadnego systemu uczącego (ML/RL).
 
-**AI w procesie tworzenia**: Claude Code (Anthropic) był używany jako asystent programistyczny przy implementacji mechanik (logika serwisów AI wroga, system poziomów, HUD, algorytm ping-pong pathfindingu). AI nie generowało grafiki, muzyki ani treści — służyło wyłącznie jako narzędzie do pisania i debugowania kodu GDScript.
+**AI w procesie tworzenia**: Claude Code (Anthropic) był używany jako asystent w celu weryfikacji kodu + pomocy z czytaniem dokumentacji
 
 ---
 
