@@ -5,51 +5,95 @@ signal hit
 @export var speed = 400
 var screen_size
 
-func _ready():
-	process_mode = Node.PROCESS_MODE_PAUSABLE
-	screen_size = get_viewport_rect().size
-	hide()
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 const CIRCLE_RADIUS = 20.0
 const BLADE_LENGTH = 75.0
 
+func _ready():
+	sprite.play("idle")
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+	screen_size = get_viewport_rect().size
+	hide()
+
 func _draw():
 	draw_circle(Vector2.ZERO, CIRCLE_RADIUS, Color.WHITE)
+
 	var mouse_local = get_local_mouse_position()
 	if mouse_local.length() < 1.0:
 		return
+
 	var dir = mouse_local.normalized()
 	var perp = dir.rotated(PI / 2.0)
-	# Tapered blade: wide at base (circle edge), pointed at tip
-	var base = dir * CIRCLE_RADIUS
-	var tip  = dir * (CIRCLE_RADIUS + BLADE_LENGTH)
-	var p1 = base + perp * 5.0
-	var p2 = base - perp * 5.0
-	var p3 = tip  - perp * 1.0
-	var p4 = tip  + perp * 1.0
-	draw_colored_polygon(PackedVector2Array([p1, p2, p3, p4]), Color.CYAN)
+
+	#var base = dir * CIRCLE_RADIUS
+	#var tip = dir * (CIRCLE_RADIUS + BLADE_LENGTH)
+#
+	#var p1 = base + perp * 5.0
+	#var p2 = base - perp * 5.0
+	#var p3 = tip - perp * 1.0
+	#var p4 = tip + perp * 1.0
+
+	#draw_colored_polygon(PackedVector2Array([p1, p2, p3, p4]), Color.CYAN)a
 
 func _physics_process(_delta):
 	if not visible:
 		return
+
 	var dir = Vector2.ZERO
+	var pressed_direction := ""
+
 	if Input.is_action_pressed("move_right"):
 		dir.x += 1
+		pressed_direction = "right"
+
 	if Input.is_action_pressed("move_left"):
 		dir.x -= 1
+		pressed_direction = "left"
+
 	if Input.is_action_pressed("move_down"):
 		dir.y += 1
+		pressed_direction = "down"
+
 	if Input.is_action_pressed("move_up"):
 		dir.y -= 1
+		pressed_direction = "up"
 
-	velocity = dir.normalized() * speed * GameSettings.player_speed_multiplier if dir.length() > 0 else Vector2.ZERO
+	if dir.length() > 0:
+		velocity = dir.normalized() * speed * GameSettings.player_speed_multiplier
+		update_animation(pressed_direction)
+	else:
+		velocity = Vector2.ZERO
+		# Nie wracamy do idle.
+		# Zostaje ostatnia animacja/kierunek.
+
 	move_and_slide()
+
+func update_animation(direction: String) -> void:
+	match direction:
+		"right":
+			sprite.flip_h = false
+			sprite.play("walk_side")
+
+		"left":
+			sprite.flip_h = true
+			sprite.play("walk_side")
+
+		"down":
+			sprite.flip_h = false
+			sprite.play("walk_down")
+
+		"up":
+			sprite.flip_h = false
+			sprite.play("walk_up")
 
 func _process(_delta):
 	var mouse_local = get_local_mouse_position()
 	var dir = mouse_local.normalized() if mouse_local.length() > 1.0 else Vector2.RIGHT
+
 	$Weapon.position = dir * (CIRCLE_RADIUS + BLADE_LENGTH / 2.0)
 	$Weapon.rotation = dir.angle()
+
 	queue_redraw()
 
 func start(pos):

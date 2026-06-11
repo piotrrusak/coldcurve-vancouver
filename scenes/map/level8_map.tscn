@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://blevel8map001"]
+[gd_scene format=4 uid="uid://3ysnufgx4d86"]
 
 [ext_resource type="Texture2D" uid="uid://p52j5k6q5uut" path="res://assets/tiles/floor.png" id="1_floor"]
 [ext_resource type="Texture2D" uid="uid://mqvls2ppk2kh" path="res://assets/tiles/wall.png" id="2_wall"]
