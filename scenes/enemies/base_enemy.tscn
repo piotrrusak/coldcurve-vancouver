@@ -160,7 +160,7 @@ script = ExtResource("6")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1516493202]
 target_desired_distance = 40.0
-debug_enabled = true
+debug_enabled = false
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="SearchPauseTimer" to="Services/SearchService" method="_on_search_pause_timer_timeout"]
