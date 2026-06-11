@@ -72,6 +72,10 @@ start_game={
 
 3d/physics_engine="Jolt Physics"
 
+[debug]
+
+shapes/navigation/enabled=false
+
 [rendering]
 
 rendering_device/driver.windows="d3d12"
